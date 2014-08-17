@@ -11,30 +11,34 @@ Applying the patch:
 	gunzip Android-Terminal-Emulator-master.patch.gz
 	patch -p1 < Android-Terminal-Emulator-master.patch
 
+
 Changes:
 
-ant.properties:
+Update ant.properties:
 
 	# key.alias=jackpal.keystore
 	# key.store=../../Documents/workspace/keystore/jackpal.keystore
 
 
-project.properties:
+Update project.properties:
 
 	key.store=../gv.keystore
 	key.alias=gv_ks
 	ndk.dir=/opt/local/android/android-ndk-r9d
 
-local.properties:
+Update local.properties:
 
 	sdk.dir=/opt/local/android/adt-bundle-linux-x86-20140321/sdk
 
-addition:
+Addition:
 
 	custom_rules.xml	
 
+Generate build.xml:
 
-Once the patch is applied, do:
+	android update project -p . --subprojects --target 1
+
+Once the patch is applied and build.xml is generated do:
 
 	ant release 
 	or
