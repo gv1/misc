@@ -14,19 +14,23 @@ Applying the patch:
 Changes:
 
 ant.properties:
+
 	# key.alias=jackpal.keystore
 	# key.store=../../Documents/workspace/keystore/jackpal.keystore
 
 
 project.properties:
+
 	key.store=../gv.keystore
 	key.alias=gv_ks
 	ndk.dir=/opt/local/android/android-ndk-r9d
 
 local.properties:
+
 	sdk.dir=/opt/local/android/adt-bundle-linux-x86-20140321/sdk
 
 addition:
+
 	custom_rules.xml	
 
 
@@ -37,6 +41,7 @@ Once the patch is applied, do:
 	ant release install
 
 Built with:
+
 	adt-bundle-linux-x86-20140321
 	android-ndk-r9d
 	apache-ant
