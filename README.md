@@ -37,6 +37,8 @@ Addition:
 Generate build.xml:
 
 	android update project -p . --subprojects --target 1
+	( cd libraries/emulatorview; \
+	android update project -p . --subprojects --target 1 )
 
 Once the patch is applied and build.xml is generated do:
 
