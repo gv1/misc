@@ -1,6 +1,20 @@
 ## Misc code etc
 
+
+## Slackware installation script
+
+slackware.install.sh
+
+Helps install slackware to the desired partition under proot, on host or
+device. as simple as
+	./slackware.install.sh a 
+to install series a alone etc. This is only a preliminary checkin. Only some options are tested.
+
+
+## Android-Terminal-Emulator-master patch
+
 Android-Terminal-Emulator-master.patch.gz
+
 patch used to build [Android-Terminal-Emulator](https://github.com/jackpal/Android-Terminal-Emulator) 
 
 Without the patch, libjackpal-androidterm4 was not getting added to the the apk, and Terminal Emulator not functioning.
@@ -18,6 +32,8 @@ Update ant.properties:
 
 	# key.alias=jackpal.keystore
 	# key.store=../../Documents/workspace/keystore/jackpal.keystore
+
+   TODO: *add key related lines here as project.properties is not the right place*
 
 
 Update project.properties:
