@@ -9,6 +9,7 @@ Helps install slackware to the desired partition under proot, on host or
 device. as simple as
 	./slackware.install.sh a 
 to install series a alone etc. This is only a preliminary checkin. Only some options are tested.
+see proot.sh for installation under qemu.
 
 
 ## Android-Terminal-Emulator-master patch
