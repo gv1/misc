@@ -9,21 +9,35 @@ Helps install slackware to the desired partition under proot, on host or
 device. as simple as
 	./slackware.install.sh a 
 to install series a alone etc. This is only a preliminary checkin. Only some options are tested.
-see proot.sh for installation under qemu.
+
+See proot.sh for installation under qemu.
+
+Partition where slackware is to be installed is mounted at /mnt
+Slackware packges under slackware-14.1
+procedure: 
+
+   sh proot.sh
+
+inside proot:
+
+   sh ./slackware.install.sh a
+
+see 
+
+[screenshot](https://github.com/gv1/misc/screeshot.txt)
 
 
 ## Android-Terminal-Emulator-master patch
 
 Android-Terminal-Emulator-master.patch.gz
 
-patch used to build [Android-Terminal-Emulator](https://github.com/jackpal/Android-Terminal-Emulator) 
+Patch used to build [Android-Terminal-Emulator](https://github.com/jackpal/Android-Terminal-Emulator) 
 
 Without the patch, libjackpal-androidterm4 was not getting added to the the apk, and Terminal Emulator not functioning.
 	
 Applying the patch:
 
 	cd Android-Terminal-Emulator-master
-	gunzip Android-Terminal-Emulator-master.patch.gz
 	patch -p1 < Android-Terminal-Emulator-master.patch
 
 
@@ -33,19 +47,13 @@ Update ant.properties:
 
 	# key.alias=jackpal.keystore
 	# key.store=../../Documents/workspace/keystore/jackpal.keystore
-
-   TODO: *add key related lines here as project.properties is not the right place*
-
-
-Update project.properties:
-
 	key.store=../gv.keystore
 	key.alias=gv_ks
 	ndk.dir=/opt/local/android/android-ndk-r9d
-
-Update local.properties:
-
 	sdk.dir=/opt/local/android/adt-bundle-linux-x86-20140321/sdk
+
+   TODO: *add key related lines here as project.properties is not the right place*
+
 
 Addition:
 
