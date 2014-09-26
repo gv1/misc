@@ -1,0 +1,163 @@
+diff -uNr sqlitestudio-2.1.5/er sqlitestudio-2.1.5.working/er
+--- sqlitestudio-2.1.5/er	1970-01-01 05:30:00.000000000 +0530
++++ sqlitestudio-2.1.5.working/er	2014-09-26 13:52:12.000000000 +0530
+@@ -0,0 +1,33 @@
++cannot inherit from "Shortcuts" (class "Shortcuts" not found in context "::")
++    while executing
++"inherit DBGrid Shortcuts GridHints"
++    (class "ResultGrid" body line 2)
++    invoked from within
++"class ResultGrid {
++	inherit DBGrid Shortcuts GridHints
++
++	common realFormat {%1.1f}
++
++	constructor {args} {
++		DBGrid::constructor {*}$args -multicell 1 ..."
++    (file "src/grids/result_grid.tcl" line 4)
++    invoked from within
++"source -encoding utf-8 $script"
++    (procedure "use" line 6)
++    invoked from within
++"use $f2"
++    ("foreach" body line 4)
++    invoked from within
++"foreach f2 [glob -nocomplain -directory $f *] {
++			if {$f2 in $filesToOmmit} continue
++			if {[string match -nocase "*.tcl" $f2]} {
++				use $f2
++			}
++		..."
++    ("foreach" body line 4)
++    invoked from within
++"foreach f [glob -nocomplain -directory src *] {
++	if {$f in $filesToOmmit} continue
++	if {[file isdirectory $f]} {
++		foreach f2 [glob -nocomplain -direc..."
++    (file "./main.tcl" line 464)
+diff -uNr sqlitestudio-2.1.5/main.tcl sqlitestudio-2.1.5.working/main.tcl
+--- sqlitestudio-2.1.5/main.tcl	2013-12-15 01:07:28.000000000 +0530
++++ sqlitestudio-2.1.5.working/main.tcl	2014-09-26 13:50:35.000000000 +0530
+@@ -22,6 +22,18 @@
+ 	set ::DISTRIBUTION "source"
+ }
+ 
++# george
++proc abstract {method name arguments} {
++        if {$method != "method"} {error "Only methods can be abstract!"}
++        uplevel "
++                method [list $name] [list $arguments] {
++                        error \"$name method has to be implemented for class \[string trimleft \
++[\$this info class] :]\"
++                }
++        "
++}
++
++
+ # Debug mode
+ set ::DEBUG(re) no
+ set ::DEBUG(global) 0
+diff -uNr sqlitestudio-2.1.5/src/common/session.tcl sqlitestudio-2.1.5.working/src/common/session.tcl
+--- sqlitestudio-2.1.5/src/common/session.tcl	2012-07-12 01:32:34.000000000 +0530
++++ sqlitestudio-2.1.5.working/src/common/session.tcl	2014-09-26 13:56:04.000000000 +0530
+@@ -4,6 +4,15 @@
+ # <i>'Session'</i> is set of classes that extends <code>Session</code> class
+ # and needs to be recreated after next application start.
+ #<
++proc abstract {method name arguments} {
++        if {$method != "method"} {error "Only methods can be abstract!"}
++        uplevel "
++                method [list $name] [list $arguments] {
++                        error \"$name method has to be implemented for class \[string trimleft \[\$this info class] :]\"
++                }
++        "
++}
++
+ class Session {
+ 	#>
+ 	# @var session
+@@ -40,7 +49,8 @@
+ 		# and if yes, then executes proper code to restore this session item.
+ 		# @return true if the class handled this session string and restored session successfly, or false otherwise.
+ 		#<
+-		abstract proc restoreSession {sessionString}
++		# abstract proc restoreSession {sessionString}
++		proc restoreSession {sessionString}
+ 
+ 		#>
+ 		# @method save
+diff -uNr sqlitestudio-2.1.5/src/grids/result_grid.tcl sqlitestudio-2.1.5.working/src/grids/result_grid.tcl
+--- sqlitestudio-2.1.5/src/grids/result_grid.tcl	2013-04-06 00:44:28.000000000 +0530
++++ sqlitestudio-2.1.5.working/src/grids/result_grid.tcl	2014-09-26 13:53:38.000000000 +0530
+@@ -1,5 +1,6 @@
+ use src/grids/dbgrid.tcl
+ use src/grid_hints.tcl
++use src/shortcuts.tcl
+ 
+ class ResultGrid {
+ 	inherit DBGrid Shortcuts GridHints
+diff -uNr sqlitestudio-2.1.5/test.tcl sqlitestudio-2.1.5.working/test.tcl
+--- sqlitestudio-2.1.5/test.tcl	1970-01-01 05:30:00.000000000 +0530
++++ sqlitestudio-2.1.5.working/test.tcl	2014-09-26 13:43:05.000000000 +0530
+@@ -0,0 +1,37 @@
++package require Itcl
++
++proc abstract {method name arguments} {
++        if {$method != "method"} {error "Only methods can be abstract!"}
++ 	uplevel "
++ 		method [list $name] [list $arguments] {
++ 			error \"$name method has to be implemented for class \[string trimleft \[\$this info class] :]\"
++ 		}
++ 	"
++}
++
++itcl::class Base {
++ 	public {
++ 		abstract method testIt {arg}
++ 	}
++}
++
++itcl::class TestClass1 {
++ 	inherit Base
++
++ 	public {
++ 		method someMethod {}
++ 	}
++}
++
++itcl::class TestClass2 {
++ 	inherit Base
++
++ 	public {
++ 		method testIt {arg} {puts "test"}
++ 	}
++}
++
++TestClass2 cls2
++cls2 testIt dummy
++TestClass1 cls1
++# cls1 testIt dummy
+diff -uNr sqlitestudio-2.1.5/test1.tcl sqlitestudio-2.1.5.working/test1.tcl
+--- sqlitestudio-2.1.5/test1.tcl	1970-01-01 05:30:00.000000000 +0530
++++ sqlitestudio-2.1.5.working/test1.tcl	2014-09-26 13:43:17.000000000 +0530
+@@ -0,0 +1,20 @@
++package require Itcl
++
++class Session {
++        common session [list]
++
++        public {
++                method applyRestoredSession {} {}
++
++                abstract method getSessionString {}
++
++                proc restoreSession {sessionString}
++
++                proc save {}
++
++                proc recreate {}
++
++                proc applyAllRestoredSession {}
++        }
++}
++

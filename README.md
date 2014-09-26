@@ -76,3 +76,8 @@ Built with:
 	adt-bundle-linux-x86-20140321
 	android-ndk-r9d
 	apache-ant
+
+sqlitestudio-2.1.5, slackware 14.0
+	sqlitestudio-2.1.5.patch
+	works with ActiveTcl-8.6 + tkdnd2.6	
+
