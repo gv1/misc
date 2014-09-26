@@ -41,23 +41,20 @@ Applying the patch:
 	patch -p1 < Android-Terminal-Emulator-master.patch
 
 
-Changes:
+### Changes:
 
-Update ant.properties:
-
-	# key.alias=jackpal.keystore
-	# key.store=../../Documents/workspace/keystore/jackpal.keystore
-	key.store=../gv.keystore
-	key.alias=gv_ks
-	ndk.dir=/opt/local/android/android-ndk-r9d
-	sdk.dir=/opt/local/android/adt-bundle-linux-x86-20140321/sdk
-
-   TODO: *add key related lines here as project.properties is not the right place*
+Update:
+	
+	 ant.properties
 
 
 Addition:
 
 	custom_rules.xml	
+
+
+### Build instructions:
+
 
 Generate build.xml:
 
@@ -71,11 +68,12 @@ Once the patch is applied and build.xml is generated do:
 	or
 	ant release install
 
-Built with:
+Tested with:
 
 	adt-bundle-linux-x86-20140321
 	android-ndk-r9d
 	apache-ant
+
 
 ## sqlitestudio-2.1.5, slackware 14.0:
 
@@ -83,19 +81,20 @@ Built with:
 	sqlitestudio-2.1.5.patch
 	works with ActiveTcl-8.6 + tkdnd2.6	
 
-### Errors:
-#### invalid command name "abstract"
+### Errors needed fix:
+
+invalid command name "abstract"
     while executing
 "abstract method getSessionString {}"
 
-#### Only methods can be abstract!
+Only methods can be abstract!
     while executing
 "error "Only methods can be abstract!""
     (procedure "abstract" line 2)
     invoked from within
 "abstract proc restoreSession {sessionString}"
 
-#### cannot inherit from "Shortcuts" (class "Shortcuts" not found in context "::")
+cannot inherit from "Shortcuts" (class "Shortcuts" not found in context "::")
     while executing
 "inherit DBGrid Shortcuts GridHints"
 
