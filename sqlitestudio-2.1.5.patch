@@ -1,6 +1,6 @@
-diff -uNr sqlitestudio-2.1.5/src/common/session.tcl sqlitestudio-2.1.5.working/src/common/session.tcl
---- sqlitestudio-2.1.5/src/common/session.tcl	2012-07-12 01:32:34.000000000 +0530
-+++ sqlitestudio-2.1.5.working/src/common/session.tcl	2014-09-26 18:45:49.000000000 +0530
+diff -uNr sqlitestudio-2.1.5.org/src/common/session.tcl sqlitestudio-2.1.5/src/common/session.tcl
+--- sqlitestudio-2.1.5.org/src/common/session.tcl	2012-07-12 01:32:34.000000000 +0530
++++ sqlitestudio-2.1.5/src/common/session.tcl	2014-09-26 18:45:49.000000000 +0530
 @@ -4,6 +4,15 @@
  # <i>'Session'</i> is set of classes that extends <code>Session</code> class
  # and needs to be recreated after next application start.
@@ -27,9 +27,9 @@ diff -uNr sqlitestudio-2.1.5/src/common/session.tcl sqlitestudio-2.1.5.working/s
  
  		#>
  		# @method save
-diff -uNr sqlitestudio-2.1.5/src/grids/result_grid.tcl sqlitestudio-2.1.5.working/src/grids/result_grid.tcl
---- sqlitestudio-2.1.5/src/grids/result_grid.tcl	2013-04-06 00:44:28.000000000 +0530
-+++ sqlitestudio-2.1.5.working/src/grids/result_grid.tcl	2014-09-26 18:47:29.000000000 +0530
+diff -uNr sqlitestudio-2.1.5.org/src/grids/result_grid.tcl sqlitestudio-2.1.5/src/grids/result_grid.tcl
+--- sqlitestudio-2.1.5.org/src/grids/result_grid.tcl	2013-04-06 00:44:28.000000000 +0530
++++ sqlitestudio-2.1.5/src/grids/result_grid.tcl	2014-09-26 18:47:29.000000000 +0530
 @@ -1,5 +1,6 @@
  use src/grids/dbgrid.tcl
  use src/grid_hints.tcl
