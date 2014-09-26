@@ -83,3 +83,19 @@ Built with:
 	sqlitestudio-2.1.5.patch
 	works with ActiveTcl-8.6 + tkdnd2.6	
 
+### Errors:
+#### invalid command name "abstract"
+    while executing
+"abstract method getSessionString {}"
+
+#### Only methods can be abstract!
+    while executing
+"error "Only methods can be abstract!""
+    (procedure "abstract" line 2)
+    invoked from within
+"abstract proc restoreSession {sessionString}"
+
+#### cannot inherit from "Shortcuts" (class "Shortcuts" not found in context "::")
+    while executing
+"inherit DBGrid Shortcuts GridHints"
+

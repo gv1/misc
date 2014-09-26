@@ -1,6 +1,6 @@
 diff -uNr sqlitestudio-2.1.5/src/common/session.tcl sqlitestudio-2.1.5.working/src/common/session.tcl
 --- sqlitestudio-2.1.5/src/common/session.tcl	2012-07-12 01:32:34.000000000 +0530
-+++ sqlitestudio-2.1.5.working/src/common/session.tcl	2014-09-26 18:32:37.000000000 +0530
++++ sqlitestudio-2.1.5.working/src/common/session.tcl	2014-09-26 18:45:49.000000000 +0530
 @@ -4,6 +4,15 @@
  # <i>'Session'</i> is set of classes that extends <code>Session</code> class
  # and needs to be recreated after next application start.
@@ -17,9 +17,19 @@ diff -uNr sqlitestudio-2.1.5/src/common/session.tcl sqlitestudio-2.1.5.working/s
  class Session {
  	#>
  	# @var session
+@@ -40,7 +49,8 @@
+ 		# and if yes, then executes proper code to restore this session item.
+ 		# @return true if the class handled this session string and restored session successfly, or false otherwise.
+ 		#<
+-		abstract proc restoreSession {sessionString}
++		# abstract proc restoreSession {sessionString}
++		proc restoreSession {sessionString}
+ 
+ 		#>
+ 		# @method save
 diff -uNr sqlitestudio-2.1.5/src/grids/result_grid.tcl sqlitestudio-2.1.5.working/src/grids/result_grid.tcl
 --- sqlitestudio-2.1.5/src/grids/result_grid.tcl	2013-04-06 00:44:28.000000000 +0530
-+++ sqlitestudio-2.1.5.working/src/grids/result_grid.tcl	2014-09-26 13:53:38.000000000 +0530
++++ sqlitestudio-2.1.5.working/src/grids/result_grid.tcl	2014-09-26 18:47:29.000000000 +0530
 @@ -1,5 +1,6 @@
  use src/grids/dbgrid.tcl
  use src/grid_hints.tcl
