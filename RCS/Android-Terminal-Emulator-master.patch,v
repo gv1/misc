@@ -1,0 +1,91 @@
+head	1.1;
+access;
+symbols;
+locks
+	wiki:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2014.09.10.02.12.11;	author wiki;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@diff -uNr Android-Terminal-Emulator-master/ant.properties Android-Terminal-Emulator-master.compiled/ant.properties
+--- Android-Terminal-Emulator-master/ant.properties	2014-06-30 22:31:19.000000000 +0530
++++ Android-Terminal-Emulator-master.compiled/ant.properties	2014-09-10 02:07:18.000000000 +0530
+@@@@ -15,5 +15,12 @@@@
+ #  'key.alias' for the name of the key to use.
+ # The password will be asked during the build when you use the 'release' target.
+ 
+-key.alias=jackpal.keystore
+-key.store=../../Documents/workspace/keystore/jackpal.keystore
++# key.alias=jackpal.keystore
++# key.store=../../Documents/workspace/keystore/jackpal.keystore
++target=android-20
++android.library.reference.1=libraries/emulatorview
++key.store=/src/android/gv.keystore
++key.alias=gv_ks
++ndk.dir=/opt/local/android/android-ndk-r9d
++ndk.dir=/opt/local/android/android-ndk-r9d
++
+diff -uNr Android-Terminal-Emulator-master/custom_rules.xml Android-Terminal-Emulator-master.compiled/custom_rules.xml
+--- Android-Terminal-Emulator-master/custom_rules.xml	1970-01-01 05:30:00.000000000 +0530
++++ Android-Terminal-Emulator-master.compiled/custom_rules.xml	2014-09-10 02:07:23.000000000 +0530
+@@@@ -0,0 +1,45 @@@@
++<?xml version="1.0" encoding="UTF-8"?>
++<project>
++
++    <property name="doc.absolute.dir" location="${basedir}/doc"/>
++    <property name="jni.absolute.dir" location="${basedir}/jni"/>
++
++    <target name="rename-release-with-version-number">
++        <xmlproperty file="AndroidManifest.xml" 
++                     prefix="themanifest" 
++                     collapseAttributes="true"/>
++
++        <!--  see ${sdk.dir}/tools/ant/build.xml -set-release-mode -->
++        <property name="out.packaged.file" 
++                  location="${out.absolute.dir}/${ant.project.name}-${themanifest.manifest.android:versionName}-release-unsigned.apk" />
++        <property name="out.final.file" 
++                  location="${out.absolute.dir}/${ant.project.name}-${themanifest.manifest.android:versionName}.apk" />
++    </target>
++
++    <target name="release-package"
++         depends="rename-release-with-version-number,release">
++        <echo message="target: ${build.target}"></echo>
++    </target>
++
++    <target name="doc" description="generate documentation">
++        <javadoc sourcepath="${source.dir}" destdir="${doc.absolute.dir}"/>
++    </target>
++
++    <target name="jni">
++        <exec executable="${ndk.dir}/ndk-build" failonerror="true"/>
++    </target>
++
++    <target name="-post-compile" depends="jni">
++    </target>
++
++    <target name="clean" depends="android_rules.clean">
++        <exec executable="${ndk.dir}/ndk-build" failonerror="true">
++                  <arg value="clean"/>
++        </exec>
++
++        <delete dir="${doc.absolute.dir}"/>
++        <delete>
++                  <fileset dir="${jni.absolute.dir}" includes="*JNI.h" />
++        </delete>
++    </target>
++</project> 
+@

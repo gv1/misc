@@ -64,9 +64,9 @@ Generate build.xml:
 
 Once the patch is applied and build.xml is generated do:
 
-	ant release 
+	ant release  / ant debug
 	or
-	ant release install
+	ant release install  / ant debug install
 
 Tested with:
 

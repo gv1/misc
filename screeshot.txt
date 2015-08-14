@@ -1,0 +1,33 @@
+
+Partition where slackware is to be installed is mounted at /mnt
+Slackware packges under slackware-14.1
+
+sh proot.sh
+
+inside proot:
+
+sh ./slackware.install.sh a
+
+...
+Executing install script for shadow-4.1.5.1-arm-2.tgz.
+Package shadow-4.1.5.1-arm-2.tgz installed.
+
+installpkg -root /mnt   -priority ADD slackware-14.1/slackware/a/sharutils-4.14-arm-1.tgz
+Verifying package sharutils-4.14-arm-1.tgz.
+Installing package sharutils-4.14-arm-1.tgz [ADD]:
+PACKAGE DESCRIPTION:
+# sharutils (GNU shell archive packing utilities)
+#
+# `shar' makes so-called shell archives out of many files, preparing
+# them for transmission by electronic mail services.  `unshar' helps
+# unpacking shell archives after reception.  `uuencode' prepares a file
+# for transmission over an electronic channel which ignores or otherwise
+# mangles the eight bit (high order bit) of bytes.  `uudecode' does the
+# converse transformation.  `remsync' allows for remote synchronization
+# of directory trees using electronic mail. 
+#
+Package sharutils-4.14-arm-1.tgz installed.
+
+installpkg -root /mnt   -priority ADD slackware-14.1/slackware/a/slocate-3.1-arm-4.tgz
+Verifying package slocate-3.1-arm-4.tgz.
+...

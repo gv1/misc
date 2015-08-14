@@ -1,0 +1,48 @@
+head	1.1;
+access;
+symbols;
+locks
+	wiki:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2014.09.10.02.12.19;	author wiki;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@cd tmp
+rm -rf  ./Android-Terminal-Emulator-master.compiled 
+cp -r ../Android-Terminal-Emulator-master.compiled .
+cd Android-Terminal-Emulator-master.compiled
+android update project -p . --target 1 --subprojects
+cd libraries/emulatorview
+android update project -p . --target 1 --subprojects
+cd ../..
+ant clean
+ant release install
+cd ..
+diff -uNr  Android-Terminal-Emulator-master Android-Terminal-Emulator-master.compiled > Android-Terminal-Emulator-master.patch
+cd tmp
+rm -rf  ./Android-Terminal-Emulator-master.compiled
+cp -r ../Android-Terminal-Emulator-master .
+cd Android-Terminal-Emulator-master
+patch -p1 < ../../Android-Terminal-Emulator-master.patch
+android update project -p . --target 1 --subprojects
+cd libraries/emulatorview
+android update project -p . --target 1 --subprojects
+cd ../..
+ant clean
+ant release install
+
+@
